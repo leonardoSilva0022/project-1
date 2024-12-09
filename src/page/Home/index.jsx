@@ -1,9 +1,9 @@
 import { Component } from "react";
-
 import "./styles.css";
 
-import { Posts } from "../../components/Posts";
+
 import { loadPosts } from "../../utils/load-post";
+import { Posts } from "../../components/Posts";
 import { Button } from "../../components/Button";
 import { TextInput } from "../../components/TextInput";
 export class Home extends Component {
@@ -16,15 +16,18 @@ export class Home extends Component {
   };
 
   async componentDidMount() {
-    await this.loadPosts();
+    this.loadPosts();
   }
 
   loadPosts = async () => {
     const { page, postsPerPage } = this.state;
+
     const postsAndPhotos = await loadPosts();
+
     this.setState({
+      ...this.state,
       posts: postsAndPhotos.slice(page, postsPerPage),
-      allPosts: postsAndPhotos,
+      allPosts: postsAndPhotos
     });
   };
 
@@ -37,15 +40,21 @@ export class Home extends Component {
     this.setState({ posts, page: nextPage });
   };
 
-  handleChange = (e) => {
-    const { value } = e.target;
-    this.setState({ searchValue: value });
+  handleInputChange = (event) => {
+    const  value  = event.currentTarget.value;
+    this.setState({ ...this.state, searchValue: value });
   };
 
   render() {
-    const { posts, page, postsPerPage, allPosts, searchValue } = this.state;
+    const { 
+      postsPerPage, 
+      posts, 
+      page, 
+      allPosts, 
+      searchValue 
+    } = this.state;
     const noMorePosts = page + postsPerPage >= allPosts.length;
-
+    
     const filteredPosts = !!searchValue
       ? allPosts.filter((post) => {
           return post.title
@@ -56,12 +65,10 @@ export class Home extends Component {
 
     return (
       <section className="container">
-        <div class="search-container">
-          {!!searchValue && <h1>Search value: {searchValue}</h1>}
-
+        <div class="text-input-container">
           <TextInput
-            searchValue={searchValue}
-            handleChange={this.handleChange}
+            actionFn={this.handleInputChange}
+            inputValue={searchValue}
           />
         </div>
 
