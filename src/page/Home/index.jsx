@@ -50,7 +50,7 @@ export class Home extends Component {
       ? allPosts.filter((post) => {
           return post.title
             .toLowerCase()
-            .includes(searchValue.toLocaleLowerCase());
+            .includes(searchValue.toLowerCase());
         })
       : posts;
 
