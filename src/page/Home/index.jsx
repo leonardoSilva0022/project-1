@@ -11,7 +11,7 @@ export class Home extends Component {
     posts: [],
     allPosts: [],
     page: 0,
-    postsPerPage: 10,
+    postsPerPage: 4,
     searchValue: "",
   };
 
@@ -29,16 +29,21 @@ export class Home extends Component {
       posts: postsAndPhotos.slice(page, postsPerPage),
       allPosts: postsAndPhotos
     });
-  };
+  }
 
   loadMorePosts = () => {
-    const { page, postsPerPage, allPosts, posts } = this.state;
+    const {
+      page,
+      postsPerPage,
+      allPosts,
+      posts
+    } = this.state;
     const nextPage = page + postsPerPage;
     const nextPosts = allPosts.slice(nextPage, nextPage + postsPerPage);
     posts.push(...nextPosts);
 
     this.setState({ posts, page: nextPage });
-  };
+  }
 
   handleInputChange = (event) => {
     const  value  = event.currentTarget.value;
@@ -53,8 +58,8 @@ export class Home extends Component {
       allPosts, 
       searchValue 
     } = this.state;
-    const noMorePosts = page + postsPerPage >= allPosts.length;
     
+    const noMorePosts = page + postsPerPage >= allPosts.length;
     const filteredPosts = !!searchValue
       ? allPosts.filter((post) => {
           return post.title

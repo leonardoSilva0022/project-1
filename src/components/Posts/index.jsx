@@ -4,7 +4,7 @@ import { PostaCard } from "../PostCard";
 
 export const Posts = ({ posts }) => (
   <div className="posts">
-    {posts.map((post) => (
+    {posts.map(post => (
       <PostaCard
         key={post.id}
         title={post.title}
