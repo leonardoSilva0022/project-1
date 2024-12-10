@@ -44,7 +44,7 @@ export class Home extends Component {
     this.setState({ posts, page: nextPage });
   }
 
-  handleInputChange = (e) => {
+  handleChange = (e) => {
     const  value  = e.currentTarget.value;
     this.setState({ ...this.state, searchValue: value });
   };
