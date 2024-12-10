@@ -11,7 +11,7 @@ export class Home extends Component {
     posts: [],
     allPosts: [],
     page: 0,
-    postsPerPage: 2,
+    postsPerPage: 30,
     searchValue: ''
   };
 
@@ -50,9 +50,15 @@ export class Home extends Component {
   };
 
   render() {
-    const { postsPerPage, posts, page, allPosts, searchValue} = this.state;
+    const { 
+      postsPerPage, 
+      posts, 
+      page, 
+      allPosts, 
+      searchValue} 
+      = this.state;
+  
     const noMorePosts = page + postsPerPage >= allPosts.length;
-    
     const filteredPosts = !!searchValue ? 
       allPosts.filter(post => {
           return post.title.toLowerCase().includes(
@@ -88,3 +94,5 @@ export class Home extends Component {
     );
   }
 }
+
+export default Home;
