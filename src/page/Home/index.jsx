@@ -56,7 +56,7 @@ export class Home extends Component {
       page, 
       allPosts, 
       searchValue} 
-      = this.state;
+      = this.state
   
     const noMorePosts = page + postsPerPage >= allPosts.length;
     const filteredPosts = !!searchValue ? 
